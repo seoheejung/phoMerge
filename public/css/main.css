@@ -1,0 +1,163 @@
+@font-face {
+    font-family: 'LOTTERIACHAB';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2302@1.0/LOTTERIACHAB.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'JalnanGothic';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_231029@1.1/JalnanGothic.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'SUITE-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/SUITE-Regular.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+}
+
+body {
+    background-color: #EBEFF0;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+.parent-container {
+    position: relative; 
+}
+
+.logo-text {
+    margin-top: 5px;
+    text-align: center;
+    font-family: 'LOTTERIACHAB'; 
+    color : #F5B862;
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+    position: relative;
+    top: 3%;
+}
+
+.main-text {
+    position: relative;
+    margin-top: 5px;
+    text-align: center;
+    color: white; /* 글자색 변경 */
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, .5); /* x-offset y-offset blur-radius color */
+    opacity: 0; /* 처음에는 텍스트를 보이지 않게 설정 */
+    
+    animation-name: fadeIn; 
+    animation-duration: 2s; 
+    animation-fill-mode : forwards ;
+}
+
+@keyframes fadeIn {
+    to {
+        opacity :1 ;
+    }
+}
+
+.sub-text {
+    text-align: center;
+    color: white;
+    font-family: 'SUITE-Regular';
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, .5); 
+}
+
+
+.form-container {
+    background-color: #EBF5F5;
+    width: 40%; 
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    position: relative;
+}
+
+.img-container {
+    background-color: #B1D7DA;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    border-radius: 20px; 
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.img-container img {
+    max-width: 100%; /* 이미지가 div의 너비를 넘지 않도록 */
+    max-height: 100%; /* 이미지가 div의 높이를 넘지 않도록 */
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+form {
+    margin: 20px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+input[type=file] {
+    margin: 6px 0;
+    padding: 6px 12px;
+    border: none;
+    border-radius: 4px; 
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+    font-size: 12px;
+    background-color: white;
+}
+
+button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #F5C62A; 
+    color: rgb(69, 69, 69); 
+    border: none;
+    border-radius: 5px;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+}
+button:hover {
+    background-color: #ffc400;
+}
+
+.download-button {
+    display: inline-block;
+    margin-bottom: 20px;
+    padding: 10px 20px;
+    font-size: 16px;
+    color: rgb(69, 69, 69); 
+    background-color: #F5C62A; 
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+.download-button:hover {
+    background-color: #ffc400;
+}
+
+@media (max-width: 768px) {
+    .form-container {
+        width: 90%; 
+        padding: 10px;
+        position: relative;
+    }
+    .img-container {
+        padding: 10px;
+    }
+    .download-button {
+        margin-top: 10px;
+        margin-bottom: 20px;
+    }
+}

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0"/>
+        <meta name="description" content="간편하게 이미지를 세로로 합치는 사이트입니다.">
+        <meta name="keywords" content="이미지, 병합, 세로 병합, 이미지 병합, 이미지 붙이기, 사진 붙이기, 이미지 세로로 합치기">
+        <meta name="author" content="Merge Image">
+        <title>phoMerge | 이미지 세로 이어붙이기</title>
+        <link rel="stylesheet" href="/css/main.css" />
+    </head>
+    <body>
+        <div class="parent-container">
+            <div class="form-container">
+                <a href='/' class="logo-text">phoMerge</a>
+                <span class="main-text">최대 4장을 이어 붙일 수 있습니다.</span>
+                <span class="sub-text">가로 길이의 사이즈가 다를 시 배경이 검정색으로 처리됩니다.</span>
+                
+                <form action="/upload" method="post" enctype="multipart/form-data">
+                    <input type="file" name="photos" accept=".jpg,.jpeg,.png" required />
+                    <input type="file" name="photos" accept=".jpg,.jpeg,.png" required />
+                    <input type="file" name="photos" accept=".jpg,.jpeg,.png" />
+                    <input type="file" name="photos" accept=".jpg,.jpeg,.png" />
+                    <button type="submit">Upload</button>
+                </form>
+                <% if (typeof image !== 'undefined') { %>
+                    <div class="img-container">
+                        <a href="<%= image %>" download="MergedImage.png" class="download-button">Download Image</a>
+                        <!-- 이미지의 경로를 웹에서 접근 가능한 URL로 변경 -->
+                        <img src="<%= image %>" alt="Merged Image">
+                    </div>
+                <% } %>
+            </div>
+
+        </div>
+    </body>
+</html>
