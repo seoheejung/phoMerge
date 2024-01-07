@@ -20,15 +20,17 @@
 }
 
 body {
-    background-color: #EBEFF0;
+    background-image: linear-gradient(120deg, #323756 0%, #36294b 100%);
+    height: 100vh;
+    background-attachment: fixed;
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: Arial, sans-serif;
 }
 
 .parent-container {
-    position: relative; 
+    position: relative;
+    height: 100%;
 }
 
 .logo-text {
@@ -38,19 +40,31 @@ body {
     color : #F5B862;
     text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
     position: relative;
-    top: 3%;
+    font-size: -webkit-xxx-large;
 }
 
 .main-text {
     position: relative;
-    margin-top: 5px;
+    margin-top: 15px;
     text-align: center;
     color: white; /* 글자색 변경 */
-    text-shadow: 1px 1px 4px rgba(0, 0, 0, .5); /* x-offset y-offset blur-radius color */
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, .5); 
     opacity: 0; /* 처음에는 텍스트를 보이지 않게 설정 */
     
     animation-name: fadeIn; 
     animation-duration: 2s; 
+    animation-fill-mode : forwards ;
+}
+
+.sub-text {
+    margin: 5px;
+    text-align: center;
+    color: white;
+    font-family: 'SUITE-Regular';
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, .5); 
+    opacity: 0; /* 처음에는 텍스트를 보이지 않게 설정 */
+    animation-name: fadeIn; 
+    animation-duration: 3s; 
     animation-fill-mode : forwards ;
 }
 
@@ -60,28 +74,21 @@ body {
     }
 }
 
-.sub-text {
-    text-align: center;
-    color: white;
-    font-family: 'SUITE-Regular';
-    text-shadow: 1px 1px 4px rgba(0, 0, 0, .5); 
-}
-
-
 .form-container {
-    background-color: #EBF5F5;
-    width: 40%; 
-    margin: 0 auto;
+    background-image: linear-gradient(80deg, #3f464d 0%, #565d65 100%);
+    background-attachment: fixed;
+    width: 500px;
+    margin: 10px auto;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
     padding: 20px;
+    border-radius: 15px;
     position: relative;
 }
 
 .img-container {
-    background-color: #B1D7DA;
+    background-image: linear-gradient(80deg, #2F2F46 0%, #343146 100%);
     margin: 0 auto;
     display: flex;
     flex-direction: column;
@@ -96,6 +103,12 @@ body {
     max-width: 100%; /* 이미지가 div의 너비를 넘지 않도록 */
     max-height: 100%; /* 이미지가 div의 높이를 넘지 않도록 */
     box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.upload-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
 }
 
 form {
@@ -115,27 +128,50 @@ input[type=file] {
     background-color: white;
 }
 
+.file-upload {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    flex-wrap: nowrap;
+    align-items: center;
+    padding: 5px;
+    width: 95px;
+    height: 105px;
+}
+
+.browse-btn {
+    margin: 6px 0;
+    padding: 14px 18px;
+    border: none;
+    border-radius: 50%; 
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+    font-size: 12px;
+    background-color: white;
+}
+
 button {
     margin-top: 20px;
     padding: 10px 20px;
     font-size: 16px;
-    background-color: #F5C62A; 
+    background-color: #EB9F22; 
     color: rgb(69, 69, 69); 
     border: none;
     border-radius: 5px;
     box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
 }
+
 button:hover {
     background-color: #ffc400;
 }
 
-.download-button {
+.download-btn {
     display: inline-block;
     margin-bottom: 20px;
     padding: 10px 20px;
     font-size: 16px;
     color: rgb(69, 69, 69); 
-    background-color: #F5C62A; 
+    background-color: #EB9F22; 
     box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
     border: none;
     border-radius: 5px;
@@ -143,9 +179,11 @@ button:hover {
     transition: background-color 0.3s ease;
 }
 
-.download-button:hover {
+.download-btn:hover {
     background-color: #ffc400;
 }
+
+
 
 @media (max-width: 768px) {
     .form-container {
@@ -156,8 +194,23 @@ button:hover {
     .img-container {
         padding: 10px;
     }
-    .download-button {
+    .download-btn {
         margin-top: 10px;
         margin-bottom: 20px;
     }
+    .file-upload {
+        padding: 10px;
+        width: 60px;
+        height: 80px;
+    }
+
+    .main-text {
+        font-size: smaller;
+    }
+    
+    .sub-text {
+        font-size: smaller;
+        width: 180px;
+    }
 }
+
