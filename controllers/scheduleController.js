@@ -9,37 +9,42 @@ const mergeDirPath = path.join(__dirname, '../public/merged');
 
 // 디렉토리 내의 모든 파일을 삭제
 const deleteFilesInDir = (directoryPath) => {
-    // 디렉토리 읽어오기
-    fs.readdir(directoryPath, (err, files) => {
-        if (err) {
-            return console.log(`Unable to scan directory: ${err}`);
-        }
+    try {
+        // 디렉토리 읽어오기
+        fs.readdir(directoryPath, (err, files) => {
+            if (err) {
+                throw new Error(`Unable to scan directory: ${err}`);
+            }
 
-        // 디렉토리 내의 각 파일에 대해
-        files.forEach((file) => {
-            // fs.unlink 메소드를 사용하여 파일을 삭제
-            fs.unlink(path.join(directoryPath, file), err => {
-                if (err) {
-                    console.error(err);
-                }
+            // 디렉토리 내의 각 파일에 대해
+            files.forEach((file) => {
+                // fs.unlink 메소드를 사용하여 파일을 삭제
+                fs.unlink(path.join(directoryPath, file), err => {
+                    if (err) {
+                        throw new Error(err);
+                    }
+                });
             });
         });
-    });
+    } catch (error) {
+        console.error(`Error occurred in deleteFilesInDir: ${error}`);
+    }
 }
 
 const scheduleFileDeletion = () => {
-    
-    // 5분마다 실행
-    schedule.scheduleJob('*/5 * * * *', () => {
-        console.log(moment().format("YYYY-MM-DD hh:mm") + ' // uploadsDir delete')
-        deleteFilesInDir(uploadsDirPath);
-    });
+    try {
+        schedule.scheduleJob('*/10 * * * *', () => {
+            console.log('[' + moment().format("YYYY-MM-DD hh:mm") + '] uploadsDir delete')
+            deleteFilesInDir(uploadsDirPath);
+        });
 
-    // 30분마다 실행
-    schedule.scheduleJob('*/30 * * * *', () => {
-        console.log(moment().format("YYYY-MM-DD hh:mm") + ' // mergeDir delete')
-        deleteFilesInDir(mergeDirPath);
-    });
+        schedule.scheduleJob('0 */1 * * *', () => {
+            console.log('[' + moment().format("YYYY-MM-DD hh:mm") + '] mergeDir delete')
+            deleteFilesInDir(mergeDirPath);
+        });
+    } catch (error) {
+        console.error(`Error occurred in scheduleFileDeletion: ${error}`);
+    }
 }
 
 module.exports = scheduleFileDeletion;

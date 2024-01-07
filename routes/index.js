@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const { upload, mergeImages } = require('../controllers/imageController');
+const { upload } = require('../controllers/multerController');
+const { mergeImages } = require('../controllers/imageMergeController');
 
 
 router.get('/', (req, res, next) => {

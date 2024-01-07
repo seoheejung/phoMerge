@@ -26,7 +26,7 @@ $(document).ready(() => {
         }
     });
 
-    // 파일 업로드 리팩토링
+    // 파일 업로드
     for(let i=1; i<=4; i++) {
         $('#browse-btn' + i).on("click", function () {
             $('#real-input' + i).click();
@@ -35,10 +35,17 @@ $(document).ready(() => {
         $('#real-input' + i).on("change", function () {
             let files = $(this).prop('files');
             if (files.length != 0) {
-                $('#browse-btn' + i).text("✔");
+                if (files[0].size > 7 * 1024 * 1024) { // 7MB
+                    Toast.fire({
+                        icon: 'warning',
+                        title: '파일 크기가 너무 큽니다. 7MB 이하의 파일만 업로드 가능합니다.'
+                    });
+                    $(this).val(''); // 파일 선택 입력란 초기화
+                    $('#browse-btn' + i).text("+");
+                } else {
+                    $('#browse-btn' + i).text("✔");
+                }
             }
         });
     }
-
-
 });

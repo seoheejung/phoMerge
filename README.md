@@ -11,15 +11,18 @@ http://localhost:3000
 
 #### 💡 필요 패키지
 ```
-npm install path fs node-schedule node-schedule sharp multer nodemon
+npm install path fs node-schedule node-schedule sharp multer nodemon moment
 ```
 #### 💡 프로젝트 구조
 ```
 - controllers
-  - imageController.js # 이미지 병합 컨트롤러
+  - imageMergeController.js # 이미지 병합 컨트롤러
+  - multerController.js # 이미지 업로드 컨트롤러
   - scheduleController.js # 이미지 삭제 스케쥴러 컨트롤러
 - public
   - css # css 파일이 있는 폴더
+  - JS # js 파일이 있는 폴더
+  - image # 이미지 파일이 있는 폴더
   - merged # 병합된 이미지가 저장되는 폴더
   - uploads # 업로드된 이미지가 저장되는 폴더
 - routes # 라우터 관리 폴더
@@ -28,8 +31,8 @@ npm install path fs node-schedule node-schedule sharp multer nodemon
 ```
 
 #### ⏲ 스케쥴러 관리
-1. uploadsDir : 새벽 5시 삭제 예정
-2. mergeDir : 새벽 5시 5분 삭제 예정
+1. uploadsDir : 10분 마다 삭제 예정
+2. mergeDir : 1시간 마다 삭제 예정
 ```
     // 10분마다 실행
     schedule.scheduleJob('*/10 * * * *', () => {
@@ -37,8 +40,8 @@ npm install path fs node-schedule node-schedule sharp multer nodemon
         deleteFilesInDir(uploadsDirPath);
     });
 
-    // 2시간마다 실행
-    schedule.scheduleJob('0 */2 * * *', () => {
+    // 1시간마다 실행
+    schedule.scheduleJob('0 */1 * * *', () => {
         console.log('mergeDir delete')
         deleteFilesInDir(mergeDirPath);
     });
