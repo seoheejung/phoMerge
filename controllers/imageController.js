@@ -38,21 +38,28 @@ const upload = multer({
     fileFilter: fileFilter
 });
 
-// 이미지 합치기 컨트롤러
 const mergeImagesController = async (req, res, next) => {
     try {
-        // 업로드된 모든 이미지의 메타데이터 가져오기
+        // 가장 작은 이미지의 너비를 minWidth로 설정
         const imagesInfo = await Promise.all(req.files.map(file => sharp(file.path).metadata()));
-        // 모든 이미지의 높이를 합친 값을 maxHeight로 설정
-        const maxHeight = imagesInfo.reduce((sum, info) => sum + info.height, 0);
-        // 가장 넓은 이미지의 너비를 maxWidth로 설정
-        const maxWidth = Math.max(...imagesInfo.map(info => info.width));
+        const minWidth = Math.min(...imagesInfo.map(info => info.width));
+
+        // 각 이미지의 크기를 조정하고 조정된 높이 구하기
+        const resizedImages = await Promise.all(req.files.map(file =>
+            sharp(file.path)
+                .resize({ width: minWidth })
+                .toBuffer()
+        ));
+
+        // 조정된 이미지의 높이를 모두 더해 캔버스의 높이를 구하기
+        const resizedImagesInfo = await Promise.all(resizedImages.map(image => sharp(image).metadata()));
+        const canvasHeight = resizedImagesInfo.reduce((sum, info) => sum + info.height, 0);
 
         // 새 이미지의 초기 설정
         const newImage = sharp({
             create: {
-                width: maxWidth,
-                height: maxHeight,
+                width: minWidth,
+                height: canvasHeight,
                 channels: 4,
                 background: { r: 0, g: 0, b: 0 }
             }
@@ -60,14 +67,14 @@ const mergeImagesController = async (req, res, next) => {
 
         let yPosition = 0;
         // 각 이미지의 위치를 계산하여 배열에 저장
-        const images = req.files.map((file, index) => {
-            const image = {
-                input: file.path,
+        const images = resizedImages.map((image, index) => {
+            const imageToAdd = {
+                input: image,
                 top: yPosition,
                 left: 0
             };
-            yPosition += imagesInfo[index].height;
-            return image;
+            yPosition += resizedImagesInfo[index].height; // 조정된 높이를 사용
+            return imageToAdd;
         });
 
         // 'merged' 폴더가 없으면 생성
@@ -84,6 +91,10 @@ const mergeImagesController = async (req, res, next) => {
             .composite(images)
             .toFile(outputPath);
 
+        // sharp 캐시 비활성화
+        sharp.cache(false);
+
+
         // 합친 이미지 반환
         res.render('index', { image: '/merged/' + fileName });
     } catch (error) {
@@ -91,6 +102,8 @@ const mergeImagesController = async (req, res, next) => {
         next(error);
     }
 };
+
+
 
 module.exports = {
     upload,

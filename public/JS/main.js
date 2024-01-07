@@ -1,4 +1,4 @@
-$().ready(function () {
+$(document).ready(() => {
     const Toast = Swal.mixin({
         toast: true,
         position: 'center-center',
@@ -11,7 +11,7 @@ $().ready(function () {
         }
     })
 
-    $('#upload-form').on('submit', function(e) {
+    $('#upload-form').on('submit', (e) => {
         let inputValues = [$('#real-input1').val(), $('#real-input2').val(), $('#real-input3').val(), $('#real-input4').val()];
         let nonEmptyValues = inputValues.filter(function(value) {
             return value !== '';
@@ -26,53 +26,19 @@ $().ready(function () {
         }
     });
 
-    // 파일 업로드1
-    $('#browse-btn1').on("click", function () {
-        $('#real-input1').click();
-    });
+    // 파일 업로드 리팩토링
+    for(let i=1; i<=4; i++) {
+        $('#browse-btn' + i).on("click", function () {
+            $('#real-input' + i).click();
+        });
 
-    $('#real-input1').on("change", function () {
-        let files = $(this).prop('files');
-        if (files.length != 0) {
-            $('#browse-btn1').text("✔");
-        }
-    });
+        $('#real-input' + i).on("change", function () {
+            let files = $(this).prop('files');
+            if (files.length != 0) {
+                $('#browse-btn' + i).text("✔");
+            }
+        });
+    }
 
-    // 파일 업로드2
-    $('#browse-btn2').on("click", function () {
-        $('#real-input2').click();
-    });
-
-    $('#real-input2').on("change", function () {
-        $(this).next('.error-message').hide();
-        let files = $(this).prop('files');
-        if (files.length != 0) {
-            $('#browse-btn2').text("✔");
-        }
-    });
-
-    // 파일 업로드3
-    $('#browse-btn3').on("click", function () {
-        $('#real-input3').click();
-    });
-
-    $('#real-input3').on("change", function () {
-        let files = $(this).prop('files');
-        if (files.length != 0) {
-            $('#browse-btn3').text("✔");
-        }
-    });
-
-    // 파일 업로드4
-    $('#browse-btn4').on("click", function () {
-        $('#real-input4').click();
-    });
-
-    $('#real-input4').on("change", function () {
-        let files = $(this).prop('files');
-        if (files.length != 0) {
-            $('#browse-btn4').text("✔");
-        }
-    });
 
 });

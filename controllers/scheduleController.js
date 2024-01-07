@@ -1,6 +1,7 @@
 const schedule = require('node-schedule');
 const fs = require('fs');
 const path = require('path');
+const moment = require('moment');
 
 // 디렉토리 경로를 설정
 const uploadsDirPath = path.join(__dirname, '../public/uploads'); 
@@ -27,15 +28,16 @@ const deleteFilesInDir = (directoryPath) => {
 }
 
 const scheduleFileDeletion = () => {
-    // 10분마다 실행
-    schedule.scheduleJob('*/10 * * * *', () => {
-        console.log('uploadsDir delete')
+    
+    // 5분마다 실행
+    schedule.scheduleJob('*/5 * * * *', () => {
+        console.log(moment().format("YYYY-MM-DD hh:mm") + ' // uploadsDir delete')
         deleteFilesInDir(uploadsDirPath);
     });
 
-    // 2시간마다 실행
-    schedule.scheduleJob('0 */2 * * *', () => {
-        console.log('mergeDir delete')
+    // 30분마다 실행
+    schedule.scheduleJob('*/30 * * * *', () => {
+        console.log(moment().format("YYYY-MM-DD hh:mm") + ' // mergeDir delete')
         deleteFilesInDir(mergeDirPath);
     });
 }

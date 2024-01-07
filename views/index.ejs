@@ -6,8 +6,8 @@
         <meta name="description" content="간편하게 이미지를 세로로 합치는 사이트입니다.">
         <meta name="keywords" content="이미지, 병합, 세로 병합, 이미지 병합, 이미지 붙이기, 사진 붙이기, 이미지 세로로 합치기">
         <meta name="author" content="Merge Image">
-        <title>phoMerge | 이미지 세로 이어붙이기</title>
         <link rel="stylesheet" href="/css/main.css" />
+        <title>phoMerge | 이미지 세로 이어붙이기</title>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     </head>
@@ -16,7 +16,7 @@
             <div class="form-container">
                 <a href='/' class="logo-text">phoMerge</a>
                 <span class="main-text">최대 4장을 이어 붙일 수 있습니다.</span>
-                <span class="sub-text">사진의 가로 길이가 다를 시 배경이 검정색으로 처리됩니다.</span>
+                <span class="sub-text">사진의 너비가 다를 시 최소 너비에 맞춰집니다.</span>
                 <form action="/upload" method="post" enctype="multipart/form-data" id="upload-form">
                     <div class="upload-container">
                         <div class="file-upload">
@@ -45,8 +45,17 @@
                         <img src="<%= image %>" alt="Merged Image">
                     </div>
                 <% } %>
+                <footer class=footer-class>
+                    <div class=footer-container>
+                        <div class="copy">
+                            사이트명 : phoMerge
+                            © 2024 seo.hj All Rights Reserved.
+                        </div>
+                    </div>
+                </footer>
             </div>
         </div>
+
         <script src="/js/main.js"></script>
     </body>
 </html>
