@@ -1,7 +1,7 @@
 ## 📫 node.JS의 sharp 모듈로 이미지 병합 서비스 만들기
 
 ### ✨ 사이트 주소
-http://localhost:3000
+https://phomerge.run.goorm.app/
 
 ### 📌 과정
 1. 사용자로부터 이미지 최대 4장 받기
@@ -54,15 +54,16 @@ npm install path fs node-schedule node-schedule sharp multer nodemon moment
 ```
 
 
-#### 💡 배포 방법 (임시)
+#### 💡 배포 방법
 ```
-npm i -D @babel/core @babel/node @babel/preset-env
+pm2 사용
+pm2 start app.js
 ```
 
 #### 💬 이후 작업
 ```
-CSS 작업
-서버  적용 (구름 IDE 적용 예정)
-구글 웹마스터 적용
-네이버 웹마스터 적용
+CSS 작업 (완료)
+서버  적용 (구름 IDE 적용 완료)
+구글 웹마스터 적용 (완료)
+네이버 웹마스터 적용 (완료)
 ```
