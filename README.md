@@ -54,14 +54,8 @@ npm install path fs node-schedule node-schedule sharp multer nodemon moment
         deleteFilesInDir(mergeDirPath);
     });
 ```
-
-
-<<<<<<< HEAD
-#### 💡 배포 방법 (임시)
-=======
 #### 💡 배포 방법
 ```
->>>>>>> 46d1dcd8c80cb5f911f21222b26add574bed9ca8
 pm2 사용
 pm2 start app.js
 ```
@@ -72,8 +66,4 @@ CSS 작업 (완료)
 서버  적용 (구름 IDE 적용 완료)
 구글 웹마스터 적용 (완료)
 네이버 웹마스터 적용 (완료)
-<<<<<<< HEAD
 ```
-=======
-```
->>>>>>> 46d1dcd8c80cb5f911f21222b26add574bed9ca8
