@@ -1,9 +1,21 @@
 $(document).ready(() => {
-    const Toast = Swal.mixin({
+    const ToastCheck = Swal.mixin({
         toast: true,
         position: 'center-center',
         showConfirmButton: false,
         timer: 3000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+            toast.addEventListener('mouseenter', Swal.stopTimer)
+            toast.addEventListener('mouseleave', Swal.resumeTimer)
+        }
+    })
+
+    const ToastWait = Swal.mixin({
+        toast: true,
+        position: 'center-center',
+        showConfirmButton: false,
+        timer: 10000,
         timerProgressBar: true,
         didOpen: (toast) => {
             toast.addEventListener('mouseenter', Swal.stopTimer)
@@ -19,10 +31,21 @@ $(document).ready(() => {
         if (nonEmptyValues.length < 2) {
             // 최소 2장의 사진이 선택되지 않았다면 폼 제출 방지
             e.preventDefault(); 
-            Toast.fire({
+            ToastCheck.fire({
                 icon: 'warning',
                 title: '사진은 최소 2장이 필요합니다.'
             })
+        } else {
+            // submit 버튼을 비활성화
+            ToastWait.fire({
+                icon: 'warning',
+                title: '이미지가 생성중입니다.'
+            })
+            $('button[type="submit"]').prop('disabled', true);
+            // 5초 후에 버튼을 다시 활성화
+            setTimeout(function() {
+                $('button[type="submit"]').prop('disabled', false);
+            }, 5000); 
         }
     });
 

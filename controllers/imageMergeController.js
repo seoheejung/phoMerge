@@ -1,5 +1,6 @@
 const fs = require('fs');
 const sharp = require('sharp');
+const moment = require('moment');
 
 const mergeImagesController = async (req, res, next) => {
     try {
@@ -65,7 +66,7 @@ const mergeImagesController = async (req, res, next) => {
                 }
             });
         });
-
+		console.log('[' + moment().format("YYYY-MM-DD hh:mm:ss") + '] merged complete')
         // 합친 이미지 반환
         res.render('index', { image: '/merged/' + fileName });
     } catch (error) {

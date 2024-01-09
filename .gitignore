@@ -1,3 +1,7 @@
 node_modules
 public/merged
 public/uploads
+public/rss.xml
+public/sitemap.xml
+
+구글IDE 적용.txt

@@ -1,13 +1,15 @@
 ## 📫 node.JS의 sharp 모듈로 이미지 병합 서비스 만들기
 
 ### ✨ 사이트 주소
-http://localhost:3000
+https://phomerge.run.goorm.app/
 
 ### 📌 과정
 1. 사용자로부터 이미지 최대 4장 받기
-2. 업로드된 모든 이미지의 메타데이터 가져와 모든 이미지의 높이를 합친 값과 가장 넓은 이미지의 너비를 가진 새 이미지 생성
-3. 기존 이미지의 위치를 순서대로 계산하여 새 이미지와 병합
-4. 사용자에게 병합된 이미지 반환
+2. 업로드된 모든 이미지의 메타데이터 가져오기
+3. 이미지 중 가장 작은 넓이를 기준으로 다른 이미지의 비율 변경
+4. 비율 변경 후의 모든 이미지의 높이를 합친 값으로 캔퍼스 새로 생성
+5. 기존 이미지의 위치를 순서대로 계산하여 새 이미지와 병합
+6. 사용자에게 병합된 이미지 반환
 
 #### 💡 필요 패키지
 ```
@@ -31,7 +33,7 @@ npm install path fs node-schedule node-schedule sharp multer nodemon moment
 ```
 
 #### ⏲ 스케쥴러 관리
-1. uploadsDir : 10분 마다 삭제 예정 (업로드된 이미지 파일 삭제로 스케줄러 제거)
+1. uploadsDir : 10분 마다 삭제 예정
 2. mergeDir : 1시간 마다 삭제 예정
 ```
     // 10분마다 실행
@@ -55,14 +57,14 @@ npm install path fs node-schedule node-schedule sharp multer nodemon moment
 
 
 #### 💡 배포 방법 (임시)
-```
-npm i -D @babel/core @babel/node @babel/preset-env
+pm2 사용
+pm2 start app.js
 ```
 
 #### 💬 이후 작업
 ```
-CSS 작업
-서버  적용 (구름 IDE 적용 예정)
-구글 웹마스터 적용
-네이버 웹마스터 적용
+CSS 작업 (완료)
+서버  적용 (구름 IDE 적용 완료)
+구글 웹마스터 적용 (완료)
+네이버 웹마스터 적용 (완료)
 ```
