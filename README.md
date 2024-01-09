@@ -31,14 +31,15 @@ npm install path fs node-schedule node-schedule sharp multer nodemon moment
 ```
 
 #### ⏲ 스케쥴러 관리
-1. uploadsDir : 10분 마다 삭제 예정
+1. uploadsDir : 10분 마다 삭제 예정 (업로드된 이미지 파일 삭제로 스케줄러 제거)
 2. mergeDir : 1시간 마다 삭제 예정
 ```
     // 10분마다 실행
     schedule.scheduleJob('*/10 * * * *', () => {
-        console.log('uploadsDir delete')
+        console.log('[' + moment().format("YYYY-MM-DD hh:mm") + '] uploadsDir delete')
         deleteFilesInDir(uploadsDirPath);
     });
+
 
     // 1시간마다 실행
     schedule.scheduleJob('0 */1 * * *', () => {

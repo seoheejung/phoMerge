@@ -1,4 +1,3 @@
-const multer = require('multer');
 const fs = require('fs');
 const sharp = require('sharp');
 
@@ -58,6 +57,14 @@ const mergeImagesController = async (req, res, next) => {
         // sharp 캐시 비활성화
         sharp.cache(false);
 
+        // 업로드된 이미지 파일 삭제
+        req.files.forEach(file => {
+            fs.unlink(file.path, err => {
+                if (err) {
+                    console.error(`Error while deleting file ${file.path}:`, err);
+                }
+            });
+        });
 
         // 합친 이미지 반환
         res.render('index', { image: '/merged/' + fileName });

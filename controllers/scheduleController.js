@@ -33,11 +33,6 @@ const deleteFilesInDir = (directoryPath) => {
 
 const scheduleFileDeletion = () => {
     try {
-        schedule.scheduleJob('*/10 * * * *', () => {
-            console.log('[' + moment().format("YYYY-MM-DD hh:mm") + '] uploadsDir delete')
-            deleteFilesInDir(uploadsDirPath);
-        });
-
         schedule.scheduleJob('0 */1 * * *', () => {
             console.log('[' + moment().format("YYYY-MM-DD hh:mm") + '] mergeDir delete')
             deleteFilesInDir(mergeDirPath);
